@@ -61,7 +61,34 @@ app.get('/categories/:categoryId/products/:productId', (req, res) => {
   })
 })
 
-app.get('/categories/')
+app.get('/users', (req, res) => {
+  res.json ([
+    {
+      id,
+      name: 'user 1',
+      age: 20,
+    },
+    {
+      id,
+      name: 'user 2',
+      age: 30,
+    },
+    {
+      id,
+      name: 'user 3',
+      age: 40,
+    }
+  ])
+})
+
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params
+  res.json({
+    id,
+    name: 'user 1',
+    age: 20,
+  })
+})
 
 
 app.listen(port, () => {
