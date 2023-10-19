@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker')
 
 const router = express.Router()
 
-
+// funcion para generar productos aleatorios
 const randomProducts = (limit = 100) =>{
   const productos = Array.from({ length: limit }, () => ({
     productName: faker.commerce.productName(),
@@ -22,12 +22,12 @@ router.get('/', (req, res) => {
 })
 
 // ejemplo, rutas especificas antes de uno variable como el de /products/:id
-router.get('/products/filter', (req, res) => {
+router.get('/filter', (req, res) => {
   res.send('Yo soy un filter')
 })
 
 // ruta para obtener productos por id
-router.get('/products/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
   res.json({
     id,
@@ -35,3 +35,5 @@ router.get('/products/:id', (req, res) => {
     price: 2000,
   });
 });
+
+module.exports = router
