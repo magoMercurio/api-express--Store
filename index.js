@@ -1,4 +1,6 @@
 const express = require('express');
+const { faker } = require('@faker-js/faker')
+
 const app = express();
 const port = 3001;
 
@@ -13,17 +15,24 @@ app.get('/nueva-ruta', (req, res) => {
 })
 
 // ruta para obtener productos
+const randomProducts = (limit = 100) =>{
+  const productos = Array.from({ length: limit }, () => ({
+    productName: faker.commerce.productName(),
+    price: parseInt(faker.commerce.price()),
+    image: faker.image.url(),
+  }))
+  return productos
+}
+
 app.get('/products', (req, res) => {
-  res.json([
-    {
-      name: 'producto 1',
-      price: 1000
-    },
-    {
-      name: 'producto 2',
-      price: 2000
-    }
-  ])
+  const { size } = req.query
+  const products = randomProducts(size)
+  res.json(products)
+})
+
+// ejemplo, rutas especificas antes de uno variable como el de /products/:id
+app.get('/products/filter', (req, res) => {
+  res.send('Yo soy un filter')
 })
 
 // ruta para obtener productos por id
@@ -35,6 +44,8 @@ app.get('/products/:id', (req, res) => {
     price: 2000,
   });
 });
+
+
 
 // ruta para obtener categorias
 app.get('/categories',(req,res)=>{
