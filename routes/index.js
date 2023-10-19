@@ -11,6 +11,3 @@ function routerApi(app) {
 }
 
 module.exports = routerApi
-
-
-/* /api/product */
