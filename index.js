@@ -14,36 +14,6 @@ app.get('/nueva-ruta', (req, res) => {
   res.send('nueva ruta')
 })
 
-// ruta para obtener productos
-const randomProducts = (limit = 100) =>{
-  const productos = Array.from({ length: limit }, () => ({
-    productName: faker.commerce.productName(),
-    price: parseInt(faker.commerce.price()),
-    image: faker.image.url(),
-  }))
-  return productos
-}
-
-app.get('/products', (req, res) => {
-  const { size } = req.query
-  const products = randomProducts(size)
-  res.json(products)
-})
-
-// ejemplo, rutas especificas antes de uno variable como el de /products/:id
-app.get('/products/filter', (req, res) => {
-  res.send('Yo soy un filter')
-})
-
-// ruta para obtener productos por id
-app.get('/products/:id', (req, res) => {
-  const { id } = req.params;
-  res.json({
-    id,
-    name: 'producto 2',
-    price: 2000,
-  });
-});
 
 
 
