@@ -96,20 +96,16 @@ app.get('/orders/:orderId', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-  res.json ([
-    {
-      name: 'user 1',
-      age: 20,
-    },
-    {
-      name: 'user 2',
-      age: 30,
-    },
-    {
-      name: 'user 3',
-      age: 40,
-    }
-  ])
+  const { limit, offset } = req.query
+
+  if (limit && offset) {
+    res.json({
+      limit,
+      offset
+    })
+  } else {
+    res.send('no hay parametros')
+  }
 })
 
 app.get('/users/:userId', (req, res) => {
