@@ -1,23 +1,25 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker')
+/* const { faker } = require('@faker-js/faker') */
+
+const ProductServices = require('../services/productService');
 
 const router = express.Router()
+const service = new ProductServices()
 
 // funcion para generar productos aleatorios
-const randomProducts = (limit = 100) =>{
+/* const randomProducts = (limit = 100) =>{
   const productos = Array.from({ length: limit }, () => ({
     productName: faker.commerce.productName(),
     price: parseInt(faker.commerce.price()),
     image: faker.image.url(),
   }))
   return productos
-}
+} */
 
 // ruta para obtener productos
 // el nombre de la ruta
 router.get('/', (req, res) => {
-  const { size } = req.query
-  const products = randomProducts(size)
+  const products = service.find()
   res.json(products)
 })
 
@@ -29,18 +31,8 @@ router.get('/filter', (req, res) => {
 // ruta para obtener productos por id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-
-  if (id === '999') {
-    res.status(404).json({
-      message: 'Product not found',
-    })
-  } else {
-    res.status(200).json({
-      id,
-      name: 'producto 2',
-      price: 2000,
-    });
-  }
+  const product = service.findOne(id)
+  res.json(product)
 });
 
 // ruta para crear productos "POST"
