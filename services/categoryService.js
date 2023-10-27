@@ -10,17 +10,17 @@ class Categoryservices {
 
     this.categories.push(
       {
-        categoryId: 1,
+        categoryId: "1",
         category: 'Food',
         products: []
       },
       {
-        categoryId: 2,
+        categoryId: "2",
         category: 'Games',
         products: []
       },
       {
-        categoryId: 3,
+        categoryId: "3",
         category: 'clothes',
         products: []
       },

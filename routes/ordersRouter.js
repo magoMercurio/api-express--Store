@@ -11,9 +11,9 @@ router.get('/', (req, res) => {
 })
 
 // ruta para obtener ordenes por id
-router.get('/:Id', (req, res) => {
-  const { id } = req.params
-  const order = service.findOne(id)
+router.get('/:orderId', (req, res) => {
+  const { orderId } = req.params
+  const order = service.findOne(orderId)
   res.json(order)
 })
 

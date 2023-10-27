@@ -10,17 +10,17 @@ class OrderServices {
 
     this.orders.push(
       {
-        id: 1,
+        orderId: "1",
         name: 'order 1',
         price: 1000,
       },
       {
-        id: 2,
+        orderId: "2",
         name: 'order 2',
         price: 2000,
       },
       {
-        id: 3,
+        orderId: "3",
         name: 'order 3',
         price: 3000,
       }
@@ -35,8 +35,8 @@ class OrderServices {
     return this.orders;
   }
 
-  findOne(id) {
-    return this.orders.find(item => item.id === id);
+  findOne(orderId) {
+    return this.orders.find(item => item.orderId === orderId);
   }
 
   update() {
