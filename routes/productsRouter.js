@@ -36,11 +36,32 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// ruta para crear productos "POST"
 router.post('/', (req, res) => {
   const body = req.body
   res.json({
     message: 'product created',
     data: body
+  })
+})
+
+// ruta para actualizar productos "PATCH"
+router.patch('/:id', (req, res) => {
+  const { id } = req.params
+  const body = req.body
+  res.json({
+    message: 'product update',
+    data: body,
+    id,
+  })
+})
+
+// ruta para eliminar productos "DELETE"
+router.delete('/:id', (req, res) => {
+  const { id } = req.params
+  res.json({
+    message: 'product deleted',
+    id,
   })
 })
 
