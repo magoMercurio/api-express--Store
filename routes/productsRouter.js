@@ -29,17 +29,24 @@ router.get('/filter', (req, res) => {
 // ruta para obtener productos por id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'producto 2',
-    price: 2000,
-  });
+
+  if (id === '999') {
+    res.status(404).json({
+      message: 'Product not found',
+    })
+  } else {
+    res.status(200).json({
+      id,
+      name: 'producto 2',
+      price: 2000,
+    });
+  }
 });
 
 // ruta para crear productos "POST"
 router.post('/', (req, res) => {
   const body = req.body
-  res.json({
+  res.status(201).json({
     message: 'product created',
     data: body
   })
@@ -49,7 +56,7 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
   const { id } = req.params
   const body = req.body
-  res.json({
+  res.status(201).json({
     message: 'product update',
     data: body,
     id,
