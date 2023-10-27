@@ -7,6 +7,8 @@ const app = express();
 // puerto
 const port = 3001;
 
+app.use(express.json());
+
 // ruta raiz
 app.get('/', (req, res) => {
     res.send('server en Express')
