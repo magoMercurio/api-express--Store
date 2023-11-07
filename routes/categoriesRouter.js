@@ -11,6 +11,13 @@ router.get('/',(req,res)=>{
 })
 
 // ruta para obtener categorias por id
+router.get('/:categoryId', (req, res) => {
+  const { categoryId } = req.params;
+  const category = service.findOne(categoryId)
+  res.json(category)
+})
+
+// ruta para obtener categorias por id filtrando por producto tambien
 router.get('/:categoryId/products/:productId', (req, res) => {
   const { categoryId, productId } = req.params;
   const category = service.findOne(categoryId)
