@@ -1,3 +1,4 @@
+const { faker } = require('@faker-js/faker')
 
 
 class OrderServices {
@@ -27,8 +28,12 @@ class OrderServices {
     )
   }
 
-  create() {
-
+  create(data) {
+    const newOrder = {
+      orderId: faker.string.uuid(),
+      ...data
+    }
+    this.orders.push(newOrder);
   }
 
   find() {
@@ -39,8 +44,17 @@ class OrderServices {
     return this.orders.find(item => item.orderId === orderId);
   }
 
-  update() {
-
+  update(orderId, changes) {
+    const index = this.orders.findIndex(item => item.orderId === orderId);
+    if (index === -1) {
+      throw new Error('Order not found');
+    }
+    const order = this.orders[index]
+    this.orders[index] = {
+      ...order,
+      ...changes
+    }
+    return this.orders[index];
   }
 
   delete() {

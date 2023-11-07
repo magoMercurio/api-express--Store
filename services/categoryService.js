@@ -56,6 +56,7 @@ class Categoryservices {
       ...category,
       ...changes
     }
+    return this.categories[index];
   }
 
   delete() {
