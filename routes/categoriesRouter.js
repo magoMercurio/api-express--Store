@@ -20,4 +20,26 @@ router.get('/:categoryId/products/:productId', (req, res) => {
   })
 })
 
+// ruta para crear categorias
+router.post('/', (req, res) => {
+  const body = req.body
+  const newCategory = service.create(body)
+  res.status(201).json(newCategory)
+})
+
+// ruta para actualizar categorias
+router.patch('/:categoryId', (req, res) => {
+  const { categoryId } = req.params
+  const body = req.body
+  const category = service.update(categoryId, body)
+  res.status(201).json(category)
+})
+
+// ruta para eliminar categorias
+router.delete('/:categoryId', (req, res) => {
+  const { categoryId } = req.params
+  const rta = service.delete(categoryId)
+  res.json(rta)
+})
+
 module.exports = router

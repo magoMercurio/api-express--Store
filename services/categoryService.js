@@ -1,3 +1,5 @@
+const { faker } = require('@faker-js/faker')
+
 
 class Categoryservices {
 
@@ -27,8 +29,12 @@ class Categoryservices {
     )
   }
 
-  create() {
-
+  create(data) {
+    const newCategory = {
+      categoryId: faker.string.uuid(),
+      ...data
+    }
+    this.categories.push(newCategory);
   }
 
   find() {
@@ -40,8 +46,16 @@ class Categoryservices {
 
   }
 
-  update() {
-
+  update(categoryId, changes) {
+    const index = this.categories.findIndex(item => item.categoryId === categoryId);
+    if (index === -1) {
+      throw new Error('Category not found');
+    }
+    const category = this.categories[index];
+    this.categories[index] = {
+      ...category,
+      ...changes
+    }
   }
 
   delete() {
