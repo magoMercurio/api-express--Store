@@ -1,6 +1,8 @@
 const express = require('express');
 const routerApi =require('./routes');
 
+const { logErrors, errorHandler } = require('./middlewares/errorHandler');
+
 
 const app = express();
 
@@ -20,6 +22,10 @@ app.get('/nueva-ruta', (req, res) => {
 })
 
 routerApi(app);
+
+// middleware de errores
+app.use(logErrors);
+app.use(errorHandler);
 
 
 // escuchar peticiones
