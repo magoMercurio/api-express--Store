@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 })
 
 // ruta para actualizar productos "PATCH"
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
 
   try {
     const { id } = req.params
@@ -56,7 +56,7 @@ router.patch('/:id', async (req, res) => {
     const product = await service.update(id, body)
     res.status(201).json(product)
   } catch (error) {
-    res.status(404).json({ message: error.message })
+    next(error)
   }
   
 })
