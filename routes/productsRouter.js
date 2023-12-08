@@ -2,6 +2,12 @@ const express = require('express');
 /* const { faker } = require('@faker-js/faker') */
 
 const ProductServices = require('../services/productService');
+const validatorHandler = require('../middlewares/validatorHandler');
+const {
+  createProductSchema,
+  updateProductSchema,
+  getProductSchema
+  } = require('../schemas/productSchema');
 
 const router = express.Router()
 const service = new ProductServices()
@@ -29,27 +35,32 @@ router.get('/filter', (req, res) => {
 })
 
 // ruta para obtener productos por id
-router.get('/:id', async (req, res, next) => {
-
-  try {
-    const { id } = req.params;
-    const product = await service.findOne(id)
-    res.json(product)
-  } catch (error) {
-    next(error)
-  }
+router.get('/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const product = await service.findOne(id)
+      res.json(product)
+    } catch (error) {
+      next(error)
+    }
 });
 
 // ruta para crear productos "POST"
-router.post('/', async (req, res) => {
+router.post('/', 
+validatorHandler(createProductSchema, 'body'),
+async (req, res) => {
   const body = req.body
   const newProduct = await service.create(body)
   res.status(201).json(newProduct)
 })
 
 // ruta para actualizar productos "PATCH"
-router.patch('/:id', async (req, res, next) => {
-
+router.patch('/:id',
+validatorHandler(getProductSchema, 'params'),
+validatorHandler(updateProductSchema, 'body'),
+async (req, res, next) => {
   try {
     const { id } = req.params
     const body = req.body

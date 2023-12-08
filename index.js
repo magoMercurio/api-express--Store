@@ -1,5 +1,6 @@
 const express = require('express');
 const routerApi =require('./routes');
+const cors = require('cors');
 
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errorHandler');
 
@@ -10,6 +11,18 @@ const app = express();
 const port = 3001;
 
 app.use(express.json());
+
+const whitelist = ['localhost:5500','http://localhost:3000']
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('no permitido'))
+    }
+  }
+}
+app.use(cors());
 
 // ruta raiz
 app.get('/', (req, res) => {
