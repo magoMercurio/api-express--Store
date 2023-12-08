@@ -8,7 +8,7 @@ const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/err
 const app = express();
 
 // puerto
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 
@@ -25,12 +25,12 @@ const options = {
 app.use(cors());
 
 // ruta raiz
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('server en Express')
 })
 
 //ejemplo, borrar al final
-app.get('/nueva-ruta', (req, res) => {
+app.get('api/nueva-ruta', (req, res) => {
   res.send('nueva ruta')
 })
 
